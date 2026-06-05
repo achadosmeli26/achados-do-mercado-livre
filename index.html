@@ -1,62 +1,493 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Achados do Mercado Livre</title>
-<style>
-body{margin:0;font-family:Arial,sans-serif;background:#0f172a;color:#fff}
-header{padding:80px 20px;text-align:center;background:linear-gradient(135deg,#ff7a00,#ffb700)}
-header h1{margin:0;font-size:3rem;color:#111}
-nav{position:sticky;top:0;background:#111827;padding:12px;text-align:center}
-nav a{color:#fff;text-decoration:none;margin:0 10px}
-.section{padding:50px 8%}
-h2{border-left:5px solid #ff7a00;padding-left:10px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-.card{background:#1e293b;padding:20px;border-radius:16px}
-.card h3{font-size:1rem}
-.btn{display:inline-block;background:#ff7a00;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:bold}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofertas Imperdíveis | Achados do Mercado Livre</title>
+    <!-- Fonte Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Ícones FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-principal: #0f172a;
+            --bg-card: #1e293b;
+            --texto-claro: #f8fafc;
+            --texto-mutado: #94a3b8;
+            --cor-destaque: #f59e0b;
+            --cor-botao: #10b981;
+            --cor-botao-hover: #059669;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-principal);
+            color: var(--texto-claro);
+            line-height: 1.6;
+        }
+
+        /* Header / Topo */
+        header {
+            background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 2px solid rgba(245, 158, 11, 0.2);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        header h1 span {
+            color: var(--cor-destaque);
+        }
+
+        header p {
+            color: var(--texto-mutado);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Menu de Categorias */
+        .nav-categorias {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 1.5rem;
+            background-color: #111827;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            overflow-x: auto;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-categoria {
+            background-color: var(--bg-card);
+            color: var(--texto-claro);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-categoria:hover {
+            background-color: var(--cor-destaque);
+            color: #000;
+            transform: translateY(-2px);
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Seções de Categorias */
+        .secao-categoria {
+            margin-bottom: 4rem;
+            scroll-margin-top: 100px; /* Evita que o menu sticky cubra o título */
+        }
+
+        .titulo-secao {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px solid var(--bg-card);
+            padding-bottom: 0.5rem;
+        }
+
+        .titulo-secao i {
+            color: var(--cor-destaque);
+        }
+
+        /* Grid de Produtos */
+        .grid-produtos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Card do Produto */
+        .card-produto {
+            background-color: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .card-produto:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        /* Espaço da Imagem/Ícone */
+        .vitrine-img {
+            background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .vitrine-img i {
+            font-size: 4.5rem;
+            color: rgba(255, 255, 255, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .card-produto:hover .vitrine-img i {
+            transform: scale(1.1);
+            color: var(--cor-destaque);
+        }
+
+        .tag-mercado-livre {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background-color: #fff159;
+            color: #333;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Detalhes do Produto */
+        .conteudo-produto {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .titulo-produto {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--texto-claro);
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            height: 4.5rem; /* Mantém o alinhamento dos botões */
+        }
+
+        /* Botão de Compra */
+        .btn-comprar {
+            background-color: var(--cor-botao);
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background-color 0.2s ease;
+            margin-top: auto;
+        }
+
+        .btn-comprar:hover {
+            background-color: var(--cor-botao-hover);
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #0b0f19;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 5rem;
+            color: var(--texto-mutado);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .grid-produtos { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-<header><h1>🔥 Top Ofertas do Dia</h1><p>Produtos selecionados com os melhores preços.</p></header>
-<nav>
-<a href="#celulares">Celulares</a>
-<a href="#games">Games</a>
-<a href="#eletro">Eletrodomésticos</a>
-<a href="#ferramentas">Ferramentas</a>
-<a href="#tv">Eletrônicos</a>
-<a href="#fitness">Fitness</a>
-</nav>
 
-<div class="section" id="celulares"><h2>📱 Celulares</h2><div class="grid">
-<div class="card"><h3>Motorola Moto G06 128GB</h3><a class="btn" href="https://www.mercadolivre.com.br/social/noma2881?matt_word=noma2881&matt_tool=19584559&forceInApp=true&ref=BInRPIfqyRXv1KD5M0yNZf2hnse%2BXDwyk2262NYBqVCL6%2BhroQFQl%2F%2BrRB6QzlNlJpDVpCxfMAMkvtMcLvJgJfgvv4u1Yr58H9bMbisQHiHr1nD6eLLLzI3empMADPy33AajZAgpnj1odP083qk3TA3QLkYJHfpl2LDifhNVcKhFxHsYmZHjrhclq7CiINAww2bsyfg%3D">Ver Oferta</a></div>
-<div class="card"><h3>Samsung Galaxy A07 128GB</h3><a class="btn" href="https://www.mercadolivre.com.br/social/noma2881?matt_word=noma2881&matt_tool=19584559&forceInApp=true&ref=BOG8ExfEyarjiE%2BbSv8lNYEGJTc8zIUwLNlR3tN1kHSvSzbZs6Tzvx1eRNwNiiHRG5L9k9C5LV0YkCz4jEZovnNPhevrPi3XjVdOT9V9Wsfcn%2BuapGBs3dB366E82po9ScoTk6RObcNO7GelZ6oWbRK6pUeg%2BJ3G9zm4ME3a5DO%2BmsSRE3WMct9hg6f3NjiXZHzw9i4%3D">Ver Oferta</a></div>
-</div></div>
+    <!-- Header -->
+    <header>
+        <h1>Vitrine <span>VIP</span></h1>
+        <p>Encontre os melhores produtos do Mercado Livre com descontos e condições exclusivas de frete!</p>
+    </header>
 
-<div class="section" id="games"><h2>🎮 Games</h2><div class="grid">
-<div class="card"><h3>Controle PS5 DualSense Branco</h3></div>
-<div class="card"><h3>Headset Redragon Zeus RGB Wireless</h3></div>
-</div></div>
+    <!-- Menu de Navegação Rápida -->
+    <nav class="nav-categorias">
+        <a href="#celulares" class="btn-categoria"><i class="fa-solid fa-mobile-screen-button"></i> Celulares</a>
+        <a href="#games" class="btn-categoria"><i class="fa-solid fa-gamepad"></i> Games</a>
+        <a href="#eletro" class="btn-categoria"><i class="fa-solid fa-plug"></i> Eletrodomésticos</a>
+        <a href="#ferramentas" class="btn-categoria"><i class="fa-solid fa-wrench"></i> Ferramentas</a>
+        <a href="#eletronicos" class="btn-categoria"><i class="fa-solid fa-tv"></i> Eletrônicos & TV</a>
+        <a href="#esportes" class="btn-categoria"><i class="fa-solid fa-dumbbell"></i> Esportes & Fitness</a>
+    </nav>
 
-<div class="section" id="eletro"><h2>🏠 Eletrodomésticos</h2><div class="grid">
-<div class="card"><h3>Aspirador WAP Silent Speed Max</h3></div>
-<div class="card"><h3>Aspirador WAP GTW 10</h3></div>
-</div></div>
+    <!-- Container dos Produtos -->
+    <main class="container">
 
-<div class="section" id="ferramentas"><h2>🔧 Ferramentas</h2><div class="grid">
-<div class="card"><h3>Kit Chave Catraca 46 Peças</h3></div>
-<div class="card"><h3>Soprador Turbo Recarregável</h3></div>
-</div></div>
+        <!-- CELULARES -->
+        <section id="celulares" class="secao-categoria">
+            <h2 class="titulo-secao"><i class="fa-solid fa-mobile-screen-button"></i> Celulares e Smartphones</h2>
+            <div class="grid-produtos">
+                
+                <!-- Produto 1 -->
+                <div class="card-produto">
+                    <div class="vitrine-img">
+                        <span class="tag-mercado-livre">Mercado Livre</span>
+                        <i class="fa-solid fa-mobile-retro"></i>
+                    </div>
+                    <div class="conteudo-produto">
+                        <h3 class="titulo-produto">Smartphone Motorola Moto G06 - 128gb 12gb (4gb Ram + 8gb Ram Boost) E Camera 50mp Com AI - Azul Marinho</h3>
+                        <a href="https://www.mercadolivre.com.br/social/noma2881?matt_word=noma2881&matt_tool=19584559&forceInApp=true&ref=BInRPIfqyRXv1KD5M0yNZf2hnse%2BXDwyk2262NYBqVCL6%2BhroQFQl%2F%2BrRB6QzlNlJpDVpCxfMAMkvtMcLvJgJfgvv4u1Yr58H9bMbisQHiHr1nD6eLLLzI3empMADPy33AajZAgpnj1odP083qk3TA3QLkYJHfpl2LDifhNVcKhFxHsYmZHjrhclq7CiINAww2bsyfg%3D" target="_blank" class="btn-comprar">
+                            Ver Preço no Mercado Livre <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
 
-<div class="section" id="tv"><h2>📺 Eletrônicos</h2><div class="grid">
-<div class="card"><h3>Smart TV TCL 50 QLED 4K</h3></div>
-<div class="card"><h3>Smart TV AIWA 32 Android</h3></div>
-</div></div>
+                <!-- Produto 2 -->
+                <div class="card-produto">
+                    <div class="vitrine-img">
+                        <span class="tag-mercado-livre">Mercado Livre</span>
+                        <i class="fa-solid fa-mobile-screen"></i>
+                    </div>
+                    <div class="conteudo-produto">
+                        <h3 class="titulo-produto">Celular Samsung Galaxy A07 128gb, 4gb, Câmera 50mp, Tela 6.7", Proteção IP54, Processador 6nm - Violeta</h3>
+                        <a href="https://www.mercadolivre.com.br/social/noma2881?matt_word=noma2881&matt_tool=19584559&forceInApp=true&ref=BOG8ExfEyarjiE%2BbSv8lNYEGJTc8zIUwLNlR3tN1kHSvSzbZs6Tzvx1eRNwNiiHRG5L9k9C5LV0YkCz4jEZovnNPhevrPi3XjVdOT9V9Wsfcn%2BuapGBs3dB366E82po9ScoTk6RObcNO7GelZ6oWbRK6pUeg%2BJ3G9zm4ME3a5DO%2BmsSRE3WMct9hg6f3NjiXZHzw9i4%3D" target="_blank" class="btn-comprar">
+                            Ver Preço no Mercado Livre <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
 
-<div class="section" id="fitness"><h2>💪 Esportes e Fitness</h2><div class="grid">
-<div class="card"><h3>Multivitamínico Growth 120 Cápsulas</h3></div>
-<div class="card"><h3>Creatina DUX 300g</h3></div>
-</div></div>
+            </div>
+        </section>
 
-</body></html>
+        <!-- GAMES -->
+        <section id="games" class="secao-categoria">
+            <h2 class="titulo-secao"><i class="fa-solid fa-gamepad"></i> Mundo Gamer</h2>
+            <div class="grid-produtos">
+
+                <!-- Produto 1 -->
+                <div class="card-produto">
+                    <div class="vitrine-img">
+                        <span class="tag-mercado-livre">Mercado Livre</span>
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <div class="conteudo-produto">
+                        <h3 class="titulo-produto">Controle Joystick Sem Fio Sony Playstation Dualsense - Branco</h3>
+                        <a href="https://www.mercadolivre.com.br/social/noma2881?matt_word=noma2881&matt_tool=19584559&forceInApp=true&ref=BFH11ppgIbcy59YRkiT0RHEn7fnoMMUgTXd7biTRD2B8xfxDS9ExYJxdgBGV5QWb56lihRrUjORsxyEIwii0gt6CR%2FWuAFzTp28hA8Kn4yH%2BsUzeqQokaDDA2sN8huojYfW0RH0xnnWouQG%2FrPDRCY%2BGyse92tGO8UyFQ0qiL1luqgWNRIf%2BW1Z9HVTk5F0Zkm%2BH9GA%3D" target="_blank" class="btn-comprar">
+                            Ver Preço no Mercado Livre <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="card-produto">
+                    <div class="vitrine-img">
+                        <span class="tag-mercado-livre">Mercado Livre</span>
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div class="conteudo-produto">
+                        <h3 class="titulo-produto">Headset Gamer Redragon H510-Pro Zeus RGB Wireless 7.1 53mm - Preto</h3>
+                        <a href="https://www.mercadolivre.com.br/social/noma2881?matt_word=noma2881&matt_tool=19584559&forceInApp=true&ref=BM%2FF8XkUNIm5vgMIkpWhStu0l0tEiwbbjL9SeK3g1hhIhGSaTNzffk2MTkWQqqs1dA%2FAItZ8UPSyfa%2F7geSA3q5xSBruUJPncZLgsqVxLDQTXq2RvJILPefpm1oK3D0pBfiWhYEDUtk0fgIirGLM4RV4BP8Hfkdy5lWujDqNHHMJgZJJ14m0cZbA1Ss8FGgmsY24wRc%3D" target="_blank" class="btn-comprar">
+                            Ver Preço no Mercado Livre <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ELETRODOMÉSTICOS -->
+        <section id="eletro" class="secao-categoria">
+            <h2 class="titulo-secao"><i class="fa-solid fa-plug"></i> Eletrodomésticos</h2>
+            <div class="grid-produtos">
+
+                <!-- Produto 1 -->
+                <div class="card-produto">
+                    <div class="vitrine-img">
+                        <span class="tag-mercado-livre">Mercado Livre</span>
+                        <i class="fa-solid fa-broom"></i>
+                    </div>
+                    <div class="conteudo-produto">
+                        <h3 class="titulo-produto">Aspirador De Pó Vertical 3 Em 1 Silent Speed Max 1350w Wap</h3>
+                        <a href="https://www.mercadolivre.com.br/social/noma2881?matt_word=noma2881&matt_tool=19584559&forceInApp=true&ref=BMIahpRkY%2FkLbgBp2NtBxTwVs4u%2BVXq6sIamwrCauIMMdE8vZmZh2Hg3BDHkCEYYhrKZF6U7c4M5NGJxYHFezUNQaU5K65w4ccb0UPQC4%2FtFv9s6lPMdLg5ktnodWqIbPtqPDQtAxKFBCiA%2BQ0045Wd7bYsR8Jxhk83AY1M2S9OsYpd726j3xgiD8z9H7ruahnzIHpw%3D" target="_blank" class="btn-comprar">
+                            Ver Preço no Mercado Livre <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="card-produto">
+                    <div class="vitrine-img">
+                        <span class="tag-mercado-livre">Mercado Livre</span>
+                        <i class="fa-solid fa-soap"></i>
+                    </div>
+                    <div class="conteudo-produto">
+                        <h3 class="titulo-produto">Aspirador De Pó e Água Wap Gtw 10 Compacto 1400w 10 Litros - Amarelo/Preto</h3>
+                        <a href="https://www.mercadolivre.com.br/social/noma2881?matt_word=noma2881&matt_tool=19584559&forceInApp=true&ref=BKNKcuzkq5eI6R%2BOl%2FsKH8aAdU3ZMuTt%2BtoeVk5Snw1BrfICS%2BwKbqWTzHIwv57U0avdkA9iuDg%2FZKKm5RLrX0Rc3dVH3bkjyjZwB6g3Ffaj0RoT4wwZYROn5RklXBURUh9xMgaQsnYaKyurrkC9U9Wfv2S%2BveFIiq%2B%2FpIVX12tgRjzOMcSQZ%2BpGPouLaWTGmzoc8Q%3D%3D" target="_blank" class="btn-comprar">
+                            Ver Preço no Mercado Livre <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FERRAMENTAS -->
+        <section id="ferramentas" class="secao-categoria">
+            <h2 class="titulo-secao"><i class="fa-solid fa-wrench"></i> Ferramentas & Casa</h2>
+            <div class="grid-produtos">
+
+                <!-- Produto 1 -->
+                <div class="card-produto">
+                    <div class="vitrine-img">
+                        <span class="tag-mercado-livre">Mercado Livre</span>
+                        <i class="fa-solid fa-toolbox"></i>
+                    </div>
+                    <div class="conteudo-produto">
+                        <h3 class="titulo-produto">Kit Chave Catraca Soquete 46 Peças Indufer em Cromo Vanádio - Automotivo</h3>
+                        <a href="https://www.mercadolivre.com.br/social/noma2881?matt_word=noma2881&matt_tool=19584559&forceInApp=true&ref=BOapQKYvizwlewLEK34vo0Bn6l8QOzXKaABeITd%2FOdmPBsfuQQ5EIxa7NqpCVKDocfVV%2B9seFSfET8H3knvEmie8fJUyIxkntun4R7CrJ1SzP8R3%2FWoCpqqR205vzpDxUigFa2IrlLUe28qMR0Wr0dRD9OtyK2G3XjSP10bczTg4vrdgaqH3NVA08ig5gpvGKXGMrtE%3D" target="_blank" class="btn-comprar">
+                            Ver Preço no Mercado Livre <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="card-produto">
+                    <div class="vitrine-img">
+                        <span class="tag-mercado-livre">Mercado Livre</span>
+                        <i class="fa-solid fa-wind"></i>
+                    </div>
+                    <div class="conteudo-produto">
+                        <h3 class="titulo-produto">Mini Ventilador Soprador Ar Turbo 130000RPM Sem Fio Recarregável USB - Simake</h3>
+                        <a href="https://www.mercadolivre.com.br/social/noma2881?matt_word=noma2881&matt_tool=19584559&forceInApp=true&ref=BJEwb4xdygew61dpiU5bUnHCaceOyQoDuRGQFmPelAvDE3wyhc17viFpLdsnBEjDBiClM8hEp%2BgNX9PyqKaGwET2fN3waaA%2FW28BAFM%2FfMG%2BKRRJWNISrqaGgxG45CKyP9qVTivH9CQtdtgb5nqEvzRJdD1BKFQls8o8VzJZadusuMw%2BTeie2QijJtXH3%2B7B2WcX9nM%3D" target="_blank" class="btn-comprar">
+                            Ver Preço no Mercado Livre <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ELETRÔNICOS -->
+        <section id="eletronicos" class="secao-categoria">
+            <h2 class="titulo-secao"><i class="fa-solid fa-tv"></i> Eletrônicos, Áudio e Vídeo</h2>
+            <div class="grid-produtos">
+
+                <!-- Produto 1 -->
+                <div class="card-produto">
+                    <div class="vitrine-img">
+                        <span class="tag-mercado-livre">Mercado Livre</span>
+                        <i class="fa-solid fa-tv"></i>
+                    </div>
+                    <div class="conteudo-produto">
+                        <h3 class="titulo-produto">Smart TV TCL 50" QLED 4K P7K WiFi Bluetooth Google TV HDR10+ Dolby Atmos</h3>
+                        <a href="https://www.mercadolivre.com.br/social/noma2881?matt_word=noma2881&matt_tool=19584559&forceInApp=true&ref=BBhj1IhODuQeeZKTAw1NA3Xc32pAuwoyBGfihpqeYd6x0dTZpRp0WjEq5RKTFhlmoKqweEAkuPPCnQSXzpPS8b9Jm2xLYH8b3yL1jWnV%2FeNqRNvjVqEc%2BYt1mUXua%2B1gIxbblF%2B4HRrehaekl3yTjchR8KEplvCEcDFhVAQoMo6gArK8a%2FXb9KzjQLei8pPfRQAoM6s%3D" target="_blank" class="btn-comprar">
+                            Ver Preço no Mercado Livre <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="card-produto">
+                    <div class="vitrine-img">
+                        <span class="tag-mercado-livre">Mercado Livre</span>
+                        <i class="fa-solid fa-display"></i>
+                    </div>
+                    <div class="conteudo-produto">
+                        <h3 class="titulo-produto">Smart TV AIWA 32” Android HD Borda Ultrafina HDR10 Dolby Áudio</h3>
+                        <a href="https://www.mercadolivre.com.br/social/noma2881?matt_word=noma2881&matt_tool=19584559&forceInApp=true&ref=BOXYdcM5rI0RM%2FQTue9KgcZgyoKXeDYFgydgOfzFnrq0d79%2Fcm9PEarswJNt6S2nxLtYqslBbUX1%2BD4JSuI3KVyXvMqD5O7t%2FtPyC6vpGoHfk1ogseqg0kPiAjKFzVfsVYCpmkqLem1RUh7jEj8CeUN1XkEzlhCD3PtUXstYtaYpGZJ2xGHO4eCQ7GXm%2FZR9D8oYRdk%3D" target="_blank" class="btn-comprar">
+                            Ver Preço no Mercado Livre <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ESPORTES -->
+        <section id="esportes" class="secao-categoria">
+            <h2 class="titulo-secao"><i class="fa-solid fa-dumbbell"></i> Esportes e Fitness</h2>
+            <div class="grid-produtos">
+
+                <!-- Produto 1 -->
+                <div class="card-produto">
+                    <div class="vitrine-img">
+                        <span class="tag-mercado-livre">Mercado Livre</span>
+                        <i class="fa-solid fa-bottle-water"></i>
+                    </div>
+                    <div class="conteudo-produto">
+                        <h3 class="titulo-produto">Multivitamínico 120 Cáps. Growth Supplements - Sabor Neutro</h3>
+                        <a href="https://www.mercadolivre.com.br/social/noma2881?matt_word=noma2881&matt_tool=19584559&forceInApp=true&ref=BAMmMrKi8osOuA%2BBMwi%2B3uvqOPQDPAA%2BALk8b9%2FiyjFXAaOO3TwokTZHJAbE6btZULwyofMikNTadvZbh%2FFqvM%2BUlcJdgJ0zKB1AgO5g%2BCW24YDRPxap0YWsiV01z6QzWzk7Yr%2Bj7KpXfSShkvIBNllAHr3oeLJpqyKfTMhM8PUWC8fPM7O1NrbmtrhzxwjVTR78FWE%3D" target="_blank" class="btn-comprar">
+                            Ver Preço no Mercado Livre <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="card-produto">
+                    <div class="vitrine-img">
+                        <span class="tag-mercado-livre">Mercado Livre</span>
+                        <i class="fa-solid fa-weight-hanging"></i>
+                    </div>
+                    <div class="conteudo-produto">
+                        <h3 class="titulo-produto">DUX HUMAN HEALTH Creatina 100% Monohidratada Sem Sabor 300g</h3>
+                        <a href="https://www.mercadolivre.com.br/social/noma2881?matt_word=noma2881&matt_tool=19584559&forceInApp=true&ref=BPhBAnGq2xtUBEvrXQFBpdMW5T6YMLtckIH1TmRaMdS1CLRvS5YAmTDmWrUgv6tha2Xpqw8fm%2Fp%2FZirNSdjqePLrFVSaqapAJBK4QxTXMqtXFJV9fygAunjeTOL7qnGoESwNj1g4Gbl5m6rttLyOX3no4jaY9X6hED0sGIvaBFwgQ85LjyO9jv8zUJsbzKXI0Ie0eNg%3D" target="_blank" class="btn-comprar">
+                            Ver Preço no Mercado Livre <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2026 Vitrine VIP. Todos os direitos reservados.</p>
+        <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.5;">Os links desta página redirecionam para parceiros oficiais Mercado Livre.</p>
+    </footer>
+
+</body>
+</html>
