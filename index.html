@@ -1,298 +1,117 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Achados do Mercado Livre</title>
-
-<meta name="description" content="Os melhores achados do Mercado Livre em tecnologia, games, casa, ferramentas, automotivo, moda e muito mais.">
-
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Segoe UI, Arial, sans-serif;
-}
-
-body{
-background:#0b1120;
-color:white;
-}
-
-header{
-position:sticky;
-top:0;
-z-index:1000;
-background:#111827;
-padding:15px 5%;
-box-shadow:0 2px 10px rgba(0,0,0,.3);
-}
-
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.logo{
-font-size:1.8rem;
-font-weight:800;
-color:#facc15;
-}
-
-nav ul{
-display:flex;
-gap:20px;
-list-style:none;
-}
-
-nav a{
-color:white;
-text-decoration:none;
-}
-
-.hero{
-padding:90px 20px;
-text-align:center;
-background:linear-gradient(135deg,#111827,#1e3a8a);
-}
-
-.hero h1{
-font-size:3rem;
-margin-bottom:20px;
-}
-
-.hero p{
-font-size:1.2rem;
-max-width:700px;
-margin:auto;
-color:#d1d5db;
-}
-
-.hero-btn{
-display:inline-block;
-margin-top:25px;
-padding:15px 30px;
-background:#facc15;
-color:#000;
-font-weight:bold;
-border-radius:8px;
-text-decoration:none;
-}
-
-.container{
-width:90%;
-max-width:1300px;
-margin:auto;
-padding:50px 0;
-}
-
-h2{
-margin-bottom:25px;
-font-size:2rem;
-}
-
-.categorias{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-gap:15px;
-}
-
-.categoria{
-background:#1f2937;
-padding:20px;
-border-radius:10px;
-text-align:center;
-font-weight:bold;
-}
-
-.produtos{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-
-.card{
-background:#1f2937;
-border-radius:15px;
-overflow:hidden;
-transition:.3s;
-}
-
-.card:hover{
-transform:translateY(-6px);
-}
-
-.card img{
-width:100%;
-height:220px;
-object-fit:cover;
-}
-
-.card-content{
-padding:15px;
-}
-
-.card h3{
-margin-bottom:10px;
-}
-
-.card p{
-color:#cbd5e1;
-margin-bottom:15px;
-}
-
-.btn{
-display:block;
-text-align:center;
-padding:12px;
-background:#facc15;
-color:black;
-font-weight:bold;
-text-decoration:none;
-border-radius:8px;
-}
-
-footer{
-background:#111827;
-padding:40px 20px;
-text-align:center;
-margin-top:50px;
-}
-
-footer p{
-color:#9ca3af;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-<nav>
-<div class="logo"> Achados do Mercado Livre</div>
-
-<ul>
-<li><a href="#">Início</a></li>
-<li><a href="#categorias">Categorias</a></li>
-<li><a href="#ofertas">Ofertas</a></li>
-</ul>
-</nav>
-</header>
-
-<section class="hero">
-
-<h1> Os Melhores Achados do Mercado Livre</h1>
-
-<p>
-Selecionamos produtos incríveis com ótimo custo-benefício para você economizar.
-</p>
-
-<a href="#ofertas" class="hero-btn">
-VER OFERTAS AGORA
-</a>
-
-</section>
-
-<section class="container" id="categorias">
-
-<h2>📦 Categorias Populares</h2>
-
-<div class="categorias">
-
-<div class="categoria">📱 Celulares</div>
-<div class="categoria">💻 Informática</div>
-<div class="categoria">🎮 Games</div>
-<div class="categoria">🔊 Áudio</div>
-<div class="categoria">🏠 Casa</div>
-<div class="categoria">🔧 Ferramentas</div>
-<div class="categoria">🚗 Automotivo</div>
-<div class="categoria">⌚ Smartwatches</div>
-<div class="categoria">👟 Moda</div>
-<div class="categoria">⚽ Esporte</div>
-
-</div>
-
-</section>
-
-<section class="container" id="ofertas">
-
-<h2>🚀 Ofertas em Destaque</h2>
-
 <div class="produtos">
 
+<!-- CELULARES -->
 <div class="card">
-<img src="https://http2.mlstatic.com/D_NQ_NP_2X_765861-MLA95532186080_102025-F.webp">
+<img src="https://picsum.photos/500/300?cell1">
 <div class="card-content">
-<h3>Smartphone</h3>
-<p>Excelente desempenho e bateria duradoura.</p>
-<a href="https://meli.la/2STeGiX" class="btn">VER OFERTA</a>
-</div>
-</div>
-
-<div class="card">
-<img src="https://picsum.photos/500/300?2">
-<div class="card-content">
-<h3>Notebook Gamer</h3>
-<p>Alta performance para trabalho e jogos.</p>
-<a href="SEU_LINK_AQUI" class="btn">VER OFERTA</a>
+<h3>📱 Smartphone em Oferta</h3>
+<p>Confira um dos celulares mais procurados do momento.</p>
+<a href="https://meli.la/1TMmjR5" target="_blank" class="btn">VER OFERTA</a>
 </div>
 </div>
 
 <div class="card">
-<img src="https://picsum.photos/500/300?3">
+<img src="https://picsum.photos/500/300?cell2">
 <div class="card-content">
-<h3>Headset Bluetooth</h3>
-<p>Som potente e conforto premium.</p>
-<a href="SEU_LINK_AQUI" class="btn">VER OFERTA</a>
+<h3>📱 Smartphone com Excelente Custo-Benefício</h3>
+<p>Desempenho, bateria e qualidade para o dia a dia.</p>
+<a href="https://meli.la/2STeGiX" target="_blank" class="btn">VER OFERTA</a>
+</div>
+</div>
+
+<!-- GAMES -->
+<div class="card">
+<img src="https://picsum.photos/500/300?game1">
+<div class="card-content">
+<h3>🎮 Produto Gamer</h3>
+<p>Ideal para quem ama jogos e desempenho.</p>
+<a href="https://meli.la/12Xk94z" target="_blank" class="btn">VER OFERTA</a>
 </div>
 </div>
 
 <div class="card">
-<img src="https://picsum.photos/500/300?4">
+<img src="https://picsum.photos/500/300?game2">
 <div class="card-content">
-<h3>Cadeira Gamer</h3>
-<p>Ideal para quem passa horas no PC.</p>
-<a href="SEU_LINK_AQUI" class="btn">VER OFERTA</a>
+<h3>🎮 Equipamento para Games</h3>
+<p>Mais conforto e diversão para suas partidas.</p>
+<a href="https://meli.la/1eQDJHY" target="_blank" class="btn">VER OFERTA</a>
+</div>
+</div>
+
+<!-- ELETRODOMÉSTICOS -->
+<div class="card">
+<img src="https://picsum.photos/500/300?home1">
+<div class="card-content">
+<h3>🏠 Eletrodoméstico em Destaque</h3>
+<p>Facilite sua rotina com mais praticidade.</p>
+<a href="https://meli.la/2xbSGJN" target="_blank" class="btn">VER OFERTA</a>
 </div>
 </div>
 
 <div class="card">
-<img src="https://picsum.photos/500/300?5">
+<img src="https://picsum.photos/500/300?home2">
 <div class="card-content">
-<h3>Kit Ferramentas</h3>
-<p>Perfeito para manutenção doméstica.</p>
-<a href="SEU_LINK_AQUI" class="btn">VER OFERTA</a>
+<h3>🏠 Produto para Casa</h3>
+<p>Qualidade e eficiência para o seu lar.</p>
+<a href="https://meli.la/1HiYBUL" target="_blank" class="btn">VER OFERTA</a>
+</div>
+</div>
+
+<!-- FERRAMENTAS -->
+<div class="card">
+<img src="https://picsum.photos/500/300?tool1">
+<div class="card-content">
+<h3>🔧 Ferramenta Profissional</h3>
+<p>Ideal para manutenção e projetos diversos.</p>
+<a href="https://meli.la/1vwm13y" target="_blank" class="btn">VER OFERTA</a>
 </div>
 </div>
 
 <div class="card">
-<img src="https://picsum.photos/500/300?6">
+<img src="https://picsum.photos/500/300?tool2">
 <div class="card-content">
-<h3>Smartwatch</h3>
-<p>Monitore sua saúde e atividades.</p>
-<a href="SEU_LINK_AQUI" class="btn">VER OFERTA</a>
+<h3>🔧 Kit de Ferramentas</h3>
+<p>Praticidade para o dia a dia.</p>
+<a href="https://meli.la/1fb9zm7" target="_blank" class="btn">VER OFERTA</a>
+</div>
+</div>
+
+<!-- ELETRÔNICOS -->
+<div class="card">
+<img src="https://picsum.photos/500/300?tech1">
+<div class="card-content">
+<h3>🔊 Eletrônico em Oferta</h3>
+<p>Tecnologia e inovação para você.</p>
+<a href="https://meli.la/256eBQc" target="_blank" class="btn">VER OFERTA</a>
+</div>
+</div>
+
+<div class="card">
+<img src="https://picsum.photos/500/300?tech2">
+<div class="card-content">
+<h3>📺 Áudio e Vídeo</h3>
+<p>Mais qualidade para entretenimento.</p>
+<a href="https://meli.la/2GfLALw" target="_blank" class="btn">VER OFERTA</a>
+</div>
+</div>
+
+<!-- ESPORTES -->
+<div class="card">
+<img src="https://picsum.photos/500/300?sport1">
+<div class="card-content">
+<h3>⚽ Esportes e Fitness</h3>
+<p>Cuide da saúde e mantenha-se ativo.</p>
+<a href="https://meli.la/2fdNtuM" target="_blank" class="btn">VER OFERTA</a>
+</div>
+</div>
+
+<div class="card">
+<img src="https://picsum.photos/500/300?sport2">
+<div class="card-content">
+<h3>🏋️ Equipamento Fitness</h3>
+<p>Mais desempenho para seus treinos.</p>
+<a href="https://meli.la/2tCgjDJ" target="_blank" class="btn">VER OFERTA</a>
 </div>
 </div>
 
 </div>
-
-</section>
-
-<footer>
-
-<p>
-© 2026 Achados do Mercado Livre
-</p>
-
-<br>
-
-<p>
-Este site pode receber comissão por compras realizadas através dos links divulgados.
-</p>
-
-</footer>
-
-</body>
-</html>
